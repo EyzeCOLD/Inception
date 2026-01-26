@@ -1,0 +1,30 @@
+name: inception
+
+secrets:
+  mariadb_root_pw:
+    file: secrets/mariadb_root_pw.txt
+  mariadb_user_pw:
+    file: secrets/mariadb_user_pw.txt
+
+volumes:
+  mariadb_data:
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    ports:
+      - "8080:80"
+
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      DB_NAME: ${DB_NAME}
+    secrets:
+      - mariadb_root_pw
+      - mariadb_user_pw
