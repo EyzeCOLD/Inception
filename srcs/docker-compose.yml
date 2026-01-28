@@ -5,9 +5,12 @@ secrets:
     file: secrets/mariadb_root_pw.txt
   mariadb_user_pw:
     file: secrets/mariadb_user_pw.txt
+  wp_admin_pw:
+    file: secrets/wp_admin_pw.txt
 
 volumes:
   mariadb_data:
+  wp_data:
 
 services:
   nginx:
@@ -23,8 +26,19 @@ services:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-    environment:
-      DB_NAME: ${DB_NAME}
+    env_file: "./.env"
     secrets:
       - mariadb_root_pw
       - mariadb_user_pw
+
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wordpress
+    ports:
+      - "9000"
+    volumes:
+      - wp_data:/var/www/html
+    env_file: "./.env"
+    secrets:
+      - mariadb_user_pw
+      - wp_admin_pw

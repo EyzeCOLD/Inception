@@ -10,10 +10,10 @@ RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 COPY conf /etc/my.cnf.d/mariadb-server.cnf
 
 # setup script
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY mariadb_setup.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/mariadb_setup.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["mariadb_setup.sh"]
 CMD ["/usr/bin/mariadbd", "--user=mysql", "--datadir=/var/lib/mysql", "--console"]
