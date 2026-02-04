@@ -47,6 +47,9 @@ if [ ! -f "/var/lib/mysql/ibdata1" ]; then
 		ALTER USER 'mysql'@'localhost' IDENTIFIED BY '$user_pw';
 		CREATE USER IF NOT EXISTS 'mysql'@'%' IDENTIFIED BY '$user_pw';
 
+		-- Create a healthcheck user for...healthchecks
+		CREATE USER IF NOT EXISTS 'healthcheck'@'localhost';
+
 		-- Remove anonymous users
 		DELETE FROM mysql.user WHERE User='';
 
@@ -60,6 +63,7 @@ if [ ! -f "/var/lib/mysql/ibdata1" ]; then
 		-- Create wordpress database
 		CREATE DATABASE \`$DB_NAME\`;
 		GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO 'mysql'@'%';
+		GRANT USAGE ON \`$DB_NAME\`.* TO 'healthcheck'@'localhost';
 
 		-- Reload privilege tables
 		FLUSH PRIVILEGES;
