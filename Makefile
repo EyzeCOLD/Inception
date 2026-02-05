@@ -4,7 +4,7 @@ COMPOSE		:= docker compose -f srcs/docker-compose.yml
 
 DATADIR		:= $(HOME)/data
 
-all: data_dirs
+all:
 	make up
 
 data_dirs:
@@ -12,8 +12,12 @@ data_dirs:
 	mkdir -p $(DATADIR)/wordpress_data
 	mkdir -p $(DATADIR)/mariadb_data
 
-up:
-	$(COMPOSE) up --build
+up: data_dirs
+	$(COMPOSE) up -d --build
+	@echo "Job's done!"
+
+logs:
+	$(COMPOSE) logs
 
 down:
 	$(COMPOSE) down
@@ -29,4 +33,4 @@ fclean: clean
 re: fclean
 	make all
 
-.PHONY: all up down clean fclean re
+.PHONY: all up down clean fclean re log
