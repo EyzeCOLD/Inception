@@ -35,6 +35,7 @@ services:
     build: requirements/nginx/.
     volumes:
       - wp_data:/www
+    env_file: .env
     depends_on:
       wordpress:
         condition: service_healthy
@@ -49,7 +50,7 @@ services:
     build: requirements/wordpress/.
     volumes:
       - wp_data:/www
-    env_file: "./.env"
+    env_file: .env
     healthcheck:
       test: [ "CMD-SHELL", "pgrep php-fpm || exit1" ]
       interval: 10s
@@ -72,7 +73,7 @@ services:
     build: requirements/mariadb/.
     volumes:
       - mariadb_data:/var/lib/mysql
-    env_file: "./.env"
+    env_file: .env
     healthcheck:
       test: ["CMD", "mariadb-admin",  "-uhealthcheck", "ping", "-h", "localhost", "--protocol=tcp"]
       interval: 10s
