@@ -4,7 +4,7 @@ echo "***************************"
 echo "* Welcome to secret setup *"
 echo "***************************"
 
-if [ -d "./srcs/secrets/" ]; then
+if [ -d "./secrets/" ]; then
 	echo "WARNING: ./srcs/secrets/ folder already exists."
 	echo "CTRL+C if you do not wish to overwrite the secrets."
 fi
@@ -37,9 +37,9 @@ if [ ! "x$wp_user_pw" = "x$wp_user_pw2" ]; then
 	exit 1
 fi
 
-mkdir -p ./srcs/secrets
-echo "$mariadb_root_pw" > ./srcs/secrets/mariadb_root_pw.txt
-echo "$mariadb_user_pw" > ./srcs/secrets/mariadb_user_pw.txt
-echo "$wp_admin_pw" > ./srcs/secrets/wp_admin_pw.txt
-echo "$wp_user_pw" > ./srcs/secrets/wp_user_pw.txt
+mkdir -p secrets
+echo "$mariadb_root_pw" > ./secrets/mariadb_root_pw.txt
+echo "$mariadb_user_pw" > ./secrets/mariadb_user_pw.txt
+echo "$wp_admin_pw" > ./secrets/wp_admin_pw.txt
+echo "$wp_user_pw" > ./secrets/wp_user_pw.txt
 echo "/secrets/ folder created with secrets. Secret!"

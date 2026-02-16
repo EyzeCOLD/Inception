@@ -5,8 +5,8 @@ echo "****************************"
 echo "* Welcome to the env setup *"
 echo "****************************"
 
-if [ -f "./srcs/.env" ]; then
-	echo "WARNING: \"./srcs/.env\" already exists."
+if [ -f "./.env" ]; then
+	echo "WARNING: \"./.env\" already exists."
 	echo "CTRL+C if you do not wish to overwrite"
 fi
 
@@ -30,6 +30,6 @@ WP_URL=$wp_url\n
 WP_ADMIN=$wp_admin\n
 WP_ADMIN_EMAIL=$wp_admin_email\n
 WP_USER=$wp_user\n
-WP_USER_EMAIL=$wp_user_email\n" > ./srcs/.env
+WP_USER_EMAIL=$wp_user_email\n" > ./.env
 
 echo ".env created!"

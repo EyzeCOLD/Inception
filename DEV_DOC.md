@@ -10,10 +10,17 @@
 #### Setup steps
 
 1. `git clone` this repository
-2. Run the scripts `./env-setup.sh` and `./secret-setup.sh` in the rood 
-directory of the repository
-3. After the .env file and the secrets are setup, run`make`
-4. Wordpress should now be accessible via URL given in `env-setup.sh` (HTTPS)
+2. Set up the environment variables for the containers by running 
+`./srcs/env-setup.sh`
+3. Set up the passwords for the services by running `./srcs/secret-setup.sh`
+4. After the .env file and the secrets are setup, run `make` in the root of the 
+repository
+5. Wordpress should now be accessible via URL given in `env-setup.sh` (HTTPS)
+
+<strong>
+⚠️The setup scripts don't check for empty fields, invalid characters, duplicate 
+usernames or other weird inputs⚠️
+<strong> 
 
 #### Make commands
 
