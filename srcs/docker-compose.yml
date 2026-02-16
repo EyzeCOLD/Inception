@@ -26,6 +26,10 @@ volumes:
       o: bind
       device: /home/juaho/data/wordpress_data
 
+networks:
+  inception:
+    driver: bridge
+
 services:
   nginx:
     image: nginx
@@ -39,6 +43,8 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+    networks:
+      - inception
     ports:
       - "443:443"
 
@@ -64,6 +70,8 @@ services:
       - mariadb_user_pw
       - wp_admin_pw
       - wp_user_pw
+    networks:
+      - inception
 
   mariadb:
     image: mariadb
@@ -83,3 +91,5 @@ services:
     secrets:
       - mariadb_root_pw
       - mariadb_user_pw
+    networks:
+      - inception
