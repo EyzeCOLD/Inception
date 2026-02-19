@@ -34,7 +34,6 @@ networks:
 services:
   nginx:
     image: nginx
-    container_name: nginx
     init: true
     restart: unless-stopped
     build: requirements/nginx/.
@@ -51,7 +50,6 @@ services:
 
   wordpress:
     image: wordpress
-    container_name: wordpress
     init: true
     restart: unless-stopped
     build: requirements/wordpress/.
@@ -76,7 +74,6 @@ services:
 
   mariadb:
     image: mariadb
-    container_name: mariadb
     init: true
     restart: unless-stopped
     build: requirements/mariadb/.
